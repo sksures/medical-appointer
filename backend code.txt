@@ -1,0 +1,52 @@
+from flask import Flask, render_template, request, redirect, url_for
+
+import datetime
+
+
+app = Flask(_name_)
+
+
+
+# Dummy patient records
+patients = []
+
+
+
+@app.route('/')
+def home():
+
+    return render_template('index.html', patients=patients)
+
+
+@app.route('/schedule', methods=['POST'])
+
+def schedule():
+
+    if request.method == 'POST':
+
+        name = request.form['name']
+
+        date = request.form['date']
+
+        time = request.form['time']
+
+
+
+# Convert date and time to a datetime object
+
+        datetime_str = f'{date} {time}'
+
+        appointment_datetime = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
+
+
+# Store patient information
+
+        patients.append({'name': name, 'appointment_datetime': appointment_datetime})
+
+
+        return redirect(url_for('home'))
+
+
+if _name_ == '_main_':
+
+    app.run(debug=True)

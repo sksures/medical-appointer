@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>Medical Appointment Scheduler</title>
+
+</head>
+
+<body>
+    
+<h1>Medical Appointment Scheduler</h1>
+
+    
+<h2>Schedule an Appointment</h2>
+    
+<form action="/schedule" method="post">
+        
+<label for="name">Patient Name:</label>
+        
+<input type="text" id="name" name="name" required>
+
+        
+<label for="date">Date:</label>
+        
+<input type="date" id="date" name="date" required>
+
+        
+<label for="time">Time:</label>
+        
+<input type="time" id="time" name="time" required>
+
+        
+<button type="submit">Schedule Appointment</button>
+    
+</form>
+
+    
+<h2>Upcoming Appointments</h2>
+   
+<ul>
+        
+{% for patient in patients %}
+            
+<li>{{ patient.name }} - {{ patient.appointment_datetime.strftime('%Y-%m-%d %H:%M') }}</li>
+
+        {% endfor %}
+    
+</ul>
+
+</body>
+
+</html>
